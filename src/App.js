@@ -1,9 +1,8 @@
 import React from 'react';
+import DrumMachine from './Components/DrumMachine';
 
 const App = () => {
-  return (
-    <h1>Test</h1>
-  );
+  return <DrumMachine/>
 }
 
 export default App;

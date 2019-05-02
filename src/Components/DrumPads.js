@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DrumPad from './DrumPad';
 import pads from '../data/pads';
 
-const DrumPads = () => {
-  return (
-    <div id="drum-pads">
-      {Array.from(pads, ([key, value]) =>
-        <DrumPad id={key} key={key} letter={value.letter} url={value.url} />
-      )}
-    </div>
+class DrumPads extends Component {
+  render() {
+    return (
+      <div id="drum-pads">
+        {Array.from(pads, ([key, value]) =>
+          <DrumPad key={key} letter={key} id={value.id} url={value.url} />
+        )}
+      </div>
     )
   }
+}
 
 export default DrumPads;

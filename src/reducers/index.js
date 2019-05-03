@@ -21,7 +21,10 @@ for (let key of pads.keys())
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_PAD:
-      return Object.assign({}, state, { [action.letter]: 'pressed' })
+      return Object.assign({}, state, {
+        [action.letter]: 'pressed',
+        lastDrumPad: action.letter
+      })
     case END_PAD:
       return Object.assign({}, state, { [action.letter]: '' })
 

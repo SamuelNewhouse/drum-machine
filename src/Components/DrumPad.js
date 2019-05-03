@@ -18,14 +18,14 @@ class DrumPad extends Component {
   }
 
   render() {
-    const { letter, id, url, pressed, play } = this.props;
+    const { letter, id, url, pressed, playPad } = this.props;
 
     return (
       <button
         type="button"
         id={id}
         className={"drum-pad " + pressed}
-        onMouseDown={() => { play(letter) }}
+        onMouseDown={() => { playPad(letter) }}
         ref={this.buttonRef}
       >
         {letter}
@@ -43,7 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    play: letter => dispatch(playPad(letter))
+    playPad: letter => dispatch(playPad(letter))
   }
 }
 

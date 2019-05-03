@@ -5,7 +5,7 @@ import Volume from './Volume';
 
 const DrumMachine = () => {
   return (
-  <div id="drum-machine">
+  <div id="drum-machine" className="d-flex">
     <DrumPads />
     <Display />
     <Volume />

@@ -1,29 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DrumMachine from './Components/DrumMachine';
 import './index.scss'
 import pads from './data/pads';
-import playPad from './util/playPad';
+import { playPad } from './actions';
 
-const handleKeys = event => {
-  const audioID = event.key.toUpperCase();
+const handleKeys = (event, play) => {
+  const letter = event.key.toUpperCase();
 
-  if (pads.has(audioID)) {
-    const buttonID = pads.get(audioID).id;
-    playPad(buttonID, audioID);
-  }
+  if (pads.has(letter))
+    play(letter);
 }
 
 class App extends Component {
   componentDidMount() {
-    window.addEventListener('keydown', handleKeys)
+    window.addEventListener('keydown',
+      event => handleKeys(event, this.props.play)
+    );
   }
   componentWillUnmount() {
-    window.removeEventListener('keydown', handleKeys)
+    window.removeEventListener('keydown',
+      event => handleKeys(event, this.props.play)
+    );
   }
 
   render() {
-    return <DrumMachine onKeyDown={handleKeys}/>
+    return <DrumMachine onKeyDown={handleKeys} />
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    play: letter => dispatch(playPad(letter))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

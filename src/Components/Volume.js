@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Volume = () => {
-  return <div></div>
+  return <div id="volume">Volume</div>
 }
 
 export default Volume;

@@ -29,7 +29,7 @@ class DrumPad extends Component {
         ref={this.buttonRef}
       >
         {letter}
-        <audio id={letter} src={url} ref={this.audioRef} ></audio>
+        <audio id={letter} className="clip" src={url} ref={this.audioRef} ></audio>
       </button>
     )
   }

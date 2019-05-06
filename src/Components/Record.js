@@ -5,6 +5,10 @@ import play from '../svg/play3.svg';
 import pause from '../svg/pause2.svg';
 import record from '../svg/record.svg';
 import last from '../svg/last.svg';
+import copy from '../svg/copy.svg';
+import paste from '../svg/paste.svg';
+import clear from '../svg/bin.svg';
+
 const Record = () => {
   return (
     <div id="record">
@@ -15,7 +19,11 @@ const Record = () => {
         <button type="button"><img alt="Record" src={record}></img></button>
         <button type="button"><img alt="Last" src={last}></img></button>
       </div>
-      {/* Copy, Paste, Clear */}
+      <div id="record-bottom-bar">
+        <button type="button"><img alt="Copy" src={copy}></img></button>
+        <button type="button"><img alt="Paste" src={paste}></img></button>
+        <button type="button"><img alt="Clear" src={clear}></img></button>
+      </div>
     </div>
   )
 }

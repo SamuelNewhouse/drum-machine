@@ -31,8 +31,8 @@ export function endPad(letter) {
 export function recordPad(letter) {
   return { type: RECORD_PAD, letter }
 }
-export function setRecordingState(state) {
-  return { type: SET_RECORDING_STATE, state }
+export function setRecordingState(recordingState) {
+  return { type: SET_RECORDING_STATE, recordingState }
 }
 export function setRecordingPosition(position) {
   return { type: SET_RECORDING_POSITION, position }

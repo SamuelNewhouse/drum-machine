@@ -20,12 +20,15 @@
 }
 
 #drum-machine {
+  align-items: stretch;
   display: grid;
   grid-template-columns: 1fr 1fr auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
   "pads display volume"
-  "pads record volume";
+  "pads recording-top-bar volume"
+  "pads recording volume"
+  "pads recording-bottom-bar volume";
   max-width: 1024px;
   margin: auto;
 }
@@ -74,9 +77,23 @@ footer {
   text-align: center;
 }
 
-#record {
-  grid-area: record;
-  background: yellow;
+#recording-top-bar {
+  grid-area: recording-top-bar;
+}
+
+#recording {
+  position: relative;
+  grid-area: recording;
+  overflow: auto;
+
+  div {
+    max-height: 100%;
+    position: absolute;
+  }
+}
+
+#recording-bottom-bar {
+  grid-area: recording-bottom-bar;
 }
 
 #volume {

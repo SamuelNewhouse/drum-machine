@@ -29,6 +29,10 @@ const reducer = (state = initialState, action) => {
       })
     case END_PAD:
       return Object.assign({}, state, { [action.letter]: '' })
+    case RECORD_PAD:
+      return Object.assign({}, state, { recording: [...state.recording, pads.get(action.letter).id] })
+    case SET_RECORDING_STATE:
+    return Object.assign({}, state, { recordingState: action.recordingState })
 
     default:
       return state;

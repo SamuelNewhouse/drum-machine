@@ -11,9 +11,11 @@ import {
 import pads from '../data/pads'
 
 const initialState = {
+  recording: [],
   recordingState: RecordingStates.PAUSED,
-  lastDrumPad: null,
-  lastDrumPadTime: null
+  position: 0,
+  lastDrumPadTime: null,
+  lastDrumPad: null
 };
 for (let key of pads.keys())
   initialState[key] = "";

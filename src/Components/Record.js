@@ -11,22 +11,31 @@ import copy from '../svg/copy.svg';
 import paste from '../svg/paste.svg';
 import clear from '../svg/bin.svg';
 
-const Record = () => {
+const Record = ({
+  recording,
+  playRecording,
+  pauseRecording,
+  startRecording }) => {
   return (
-    <div id="record">
-      <div id="record-top-bar">
+    <>
+      <div id="recording-top-bar">
         <button type="button"><img alt="First" src={first}></img></button>
-        <button type="button"><img alt="Play" src={play}></img></button>
-        <button type="button"><img alt="Pause" src={pause}></img></button>
-        <button type="button"><img alt="Record" src={record}></img></button>
+        <button type="button" onMouseDown={playRecording}><img alt="Play" src={play}></img></button>
+        <button type="button" onMouseDown={pauseRecording}><img alt="Pause" src={pause}></img></button>
+        <button type="button" onMouseDown={startRecording}><img alt="Record" src={record}></img></button>
         <button type="button"><img alt="Last" src={last}></img></button>
       </div>
-      <div id="record-bottom-bar">
+      <div id="recording">
+        <div>
+          {recording.map(value => <>{value}<br /></>)}
+        </div>
+      </div>
+      <div id="recording-bottom-bar">
         <button type="button"><img alt="Copy" src={copy}></img></button>
         <button type="button"><img alt="Paste" src={paste}></img></button>
         <button type="button"><img alt="Clear" src={clear}></img></button>
       </div>
-    </div>
+    </>
   )
 }
 

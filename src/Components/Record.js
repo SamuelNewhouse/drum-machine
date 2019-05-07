@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setRecordingState, RecordingStates } from '../actions';
 
 import first from '../svg/first.svg';
 import play from '../svg/play3.svg';
@@ -27,4 +29,17 @@ const Record = () => {
     </div>
   )
 }
-export default Record;
+
+const mapStateToProps = state => {
+  return { recording: state.recording }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    playRecording: () => dispatch(setRecordingState(RecordingStates.PLAYING)),
+    pauseRecording: () => dispatch(setRecordingState(RecordingStates.PAUSE)),
+    startRecording: () => dispatch(setRecordingState(RecordingStates.RECORDING)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Record);

@@ -7,11 +7,10 @@ import {
   SET_RECORDING,
   RecordingStates,
 } from '../actions';
-
 import pads from '../data/pads'
 
 const initialState = {
-  recording: [],
+  recordingData: [],
   recordingState: RecordingStates.PAUSED,
   position: 0,
   lastDrumPadTime: null,
@@ -22,17 +21,44 @@ for (let key of pads.keys())
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case START_PAD:
       return Object.assign({}, state, {
         [action.letter]: 'pressed',
-        lastDrumPad: action.letter
+        lastDrumPad: action.letter,
       })
+
     case END_PAD:
       return Object.assign({}, state, { [action.letter]: '' })
+
     case RECORD_PAD:
-      return Object.assign({}, state, { recording: [...state.recording, pads.get(action.letter).id] })
+      const now = Date.now();
+      const lastDrumPadTime = state.lastDrumPadTime || now;
+      const delay = now - lastDrumPadTime;
+
+      const newRecord = {
+        name: pads.get(action.letter).id,
+        letter: action.letter,
+        delay
+      }
+      return Object.assign({}, state, {
+        recordingData: [...state.recordingData, newRecord],
+        lastDrumPadTime: now
+      })
+
     case SET_RECORDING_STATE:
-    return Object.assign({}, state, { recordingState: action.recordingState })
+      const newState = action.recordingState;
+      const oldState = state.recordingState;
+
+      // if moving into recording, set lastDrumPadTime to current time.
+      if (
+        newState === RecordingStates.RECORDING &&
+        oldState !== RecordingStates.RECORDING
+      )
+        return Object.assign({}, state, { recordingState: action.recordingState, lastDrumPadTime: Date.now() })
+      else
+        return Object.assign({}, state, { recordingState: action.recordingState })
+
 
     default:
       return state;

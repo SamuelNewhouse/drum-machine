@@ -2,6 +2,7 @@ export const PLAY_PAD = 'PLAY_PAD';
 export const START_PAD = 'START_PAD';
 export const END_PAD = 'END_PAD';
 export const RECORD_PAD = 'RECORD_PAD';
+
 export const SET_RECORDING_STATE = 'SET_RECORDING_STATE';
 export const SET_RECORDING_POSITION = 'SET_RECORDING_POSITION';
 export const SET_RECORDING = 'SET_RECORDING';
@@ -39,4 +40,29 @@ export function setRecordingPosition(position) {
 }
 export function setRecording(recording) {
   return { type: SET_RECORDING, recording }
+}
+
+export function beginPlayRecording(position) {
+  return dispatch => {
+    dispatch(setRecordingState(RecordingStates.PLAYING));
+    dispatch(continuePlayRecording(position));
+  }
+}
+export function continuePlayRecording(position) {
+  return (dispatch, getState) => {
+    const { recordingData, recordingState } = getState();
+
+    if (recordingState !== RecordingStates.PLAYING)
+      return;
+
+    if (position >= recordingData.length) {
+      dispatch(setRecordingState(RecordingStates.PAUSED));
+      dispatch(setRecordingPosition(0));
+    }
+    else {
+      const { letter, delay } = recordingData[position];
+      dispatch(playPad(letter));
+      setTimeout(() => dispatch(continuePlayRecording(position + 1)), delay);
+    }
+  }
 }

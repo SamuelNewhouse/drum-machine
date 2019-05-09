@@ -100,3 +100,9 @@ footer {
   grid-area: volume;
   background: green;
 }
+
+.record-entry {
+  &.pressed {
+    background: #555;
+  }
+}

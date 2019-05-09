@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setRecordingState, RecordingStates, beginPlayRecording } from '../actions';
+import { PAUSED, RECORDING, setRecordingState, beginPlayRecording } from '../actions';
 
 import first from '../svg/first.svg';
 import play from '../svg/play3.svg';
@@ -25,6 +25,8 @@ class Record extends Component {
   render() {
     const {
       recordingData,
+      recordingState,
+      position,
       playRecording,
       pauseRecording,
       startRecording } = this.props;
@@ -40,7 +42,15 @@ class Record extends Component {
         </div>
         <div id="recording" ref={this.recordingDivRef}>
           <div>
-            {recordingData.map(value => <>{value.name} - {value.delay} <br /></>)}
+            {recordingData.map((value, index) =>
+              <span
+                key={index}
+                className={"record-entry " + (recordingData[index].playing ? "pressed" : "")}
+              >
+                {value.name} - {value.delay}
+                <br />
+              </span>
+            )}
           </div>
         </div>
         <div id="recording-bottom-bar">
@@ -54,14 +64,18 @@ class Record extends Component {
 }
 
 const mapStateToProps = state => {
-  return { recordingData: state.recordingData }
+  return {
+    recordingData: state.recordingData,
+    recordingState: state.recordingState,
+    position: state.position
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    playRecording: () => dispatch(beginPlayRecording(0)),
-    pauseRecording: () => dispatch(setRecordingState(RecordingStates.PAUSE)),
-    startRecording: () => dispatch(setRecordingState(RecordingStates.RECORDING)),
+    playRecording: () => dispatch(beginPlayRecording()),
+    pauseRecording: () => dispatch(setRecordingState(PAUSED)),
+    startRecording: () => dispatch(setRecordingState(RECORDING)),
   }
 }
 

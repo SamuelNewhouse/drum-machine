@@ -1,17 +1,9 @@
-import {
-  START_PAD,
-  END_PAD,
-  RECORD_PAD,
-  SET_RECORDING_STATE,
-  SET_RECORDING_POSITION,
-  SET_RECORDING,
-  RecordingStates,
-} from '../actions';
+import { PAUSED, RECORDING } from '../actions';
 import pads from '../data/pads'
 
 const initialState = {
   recordingData: [],
-  recordingState: RecordingStates.PAUSED,
+  recordingState: PAUSED,
   position: 0,
   lastDrumPadTime: null,
   lastDrumPad: null
@@ -19,50 +11,86 @@ const initialState = {
 for (let key of pads.keys())
   initialState[key] = "";
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
+const actionTypeHandlers = {
+  START_PAD: function (state, action) {
+    const updates = {
+      [action.letter]: 'pressed',
+      lastDrumPad: action.letter,
+    };
 
-    case START_PAD:
-      return Object.assign({}, state, {
-        [action.letter]: 'pressed',
-        lastDrumPad: action.letter,
-      })
+    return Object.assign({}, state, updates);
+  },
 
-    case END_PAD:
-      return Object.assign({}, state, { [action.letter]: '' })
+  END_PAD: function (state, action) {
+    const updates = {
+      [action.letter]: ''
+    }
 
-    case RECORD_PAD:
-      const now = Date.now();
-      const lastDrumPadTime = state.lastDrumPadTime || now;
-      const delay = now - lastDrumPadTime;
+    return Object.assign({}, state, updates);
+  },
 
-      const newRecord = {
-        name: pads.get(action.letter).id,
-        letter: action.letter,
-        delay
-      }
-      return Object.assign({}, state, {
-        recordingData: [...state.recordingData, newRecord],
-        lastDrumPadTime: now
-      })
+  RECORD_PAD: function (state, action) {
+    const now = Date.now();
+    const lastDrumPadTime = state.lastDrumPadTime || now;
+    const delay = now - lastDrumPadTime;
 
-    case SET_RECORDING_STATE:
-      const newState = action.recordingState;
-      const oldState = state.recordingState;
+    const newRecord = {
+      name: pads.get(action.letter).id,
+      letter: action.letter,
+      playing: false,
+      delay
+    }
 
-      // if moving into recording, set lastDrumPadTime to current time.
-      if (
-        newState === RecordingStates.RECORDING &&
-        oldState !== RecordingStates.RECORDING
-      )
-        return Object.assign({}, state, { recordingState: action.recordingState, lastDrumPadTime: Date.now() })
-      else
-        return Object.assign({}, state, { recordingState: action.recordingState })
+    const updates = {
+      recordingData: [...state.recordingData, newRecord],
+      lastDrumPadTime: now,
+      position: state.position + 1
+    }
 
+    return Object.assign({}, state, updates);
+  },
 
-    default:
-      return state;
+  SET_RECORDING_STATE: function (state, action) {
+    const newState = action.recordingState;
+    const oldState = state.recordingState;
+
+    const updates = { recordingState: action.recordingState }
+
+    if (newState === RECORDING && oldState !== RECORDING)
+      updates.lastDrumPadTime = Date.now();
+
+    return Object.assign({}, state, updates);
+  },
+
+  SET_RECORDING_POSITION: function (state, action) {
+    const updates = { position: action.position }
+    return Object.assign({}, state, updates);
+  },
+
+  START_LINE: function (state, action) {
+    const recordingData = [...state.recordingData];
+    recordingData[action.position].playing = true;
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  END_LINE: function (state, action) {
+    const recordingData = [...state.recordingData];
+    recordingData[action.position].playing = false;
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
   }
+}
+
+const reducer = (state = initialState, action) => {
+  const actionHandler = actionTypeHandlers[action.type];
+
+  if (!actionHandler)
+    return state;
+
+  return actionHandler(state, action);
 }
 
 export default reducer;

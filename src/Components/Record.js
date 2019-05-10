@@ -42,14 +42,15 @@ class Record extends Component {
         </div>
         <div id="recording" ref={this.recordingDivRef}>
           <div>
-            {recordingData.map((value, index) =>
-              <span
-                key={index}
-                className={"record-entry " + (recordingData[index].playing ? "pressed" : "")}
-              >
-                {value.name} - {value.delay}
-                <br />
-              </span>
+            {recordingData.map((value, index) => {
+              let classes = "record-entry";
+              if (recordingData[index].playing)
+                classes += " playing";
+              if (index === position - 1)
+                classes += " selected";
+
+              return <div key={index} className={classes}> {value.name} - {value.delay} </div>
+            }
             )}
           </div>
         </div>

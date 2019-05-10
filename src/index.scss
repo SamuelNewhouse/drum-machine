@@ -103,7 +103,16 @@ footer {
 }
 
 .record-entry {
-  &.pressed {
+  transition: all 0.05s ease-in-out;
+  margin: 0 2px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+  &.playing {
     background: #555;
+  }
+  &.selected {
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 0px 0px 4px #001122;
   }
 }

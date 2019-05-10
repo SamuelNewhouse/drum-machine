@@ -86,9 +86,10 @@ footer {
   grid-area: recording;
   overflow: auto;
 
-  div {
+  & > div {
     max-height: 100%;
     position: absolute;
+    margin: 2px;
   }
 }
 

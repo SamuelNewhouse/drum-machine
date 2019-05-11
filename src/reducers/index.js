@@ -2,7 +2,11 @@ import { PAUSED, RECORDING } from '../actions';
 import pads from '../data/pads';
 
 const initialState = {
-  recordingData: [],
+  recordingData: [{ // Used for blank recording and entry cell
+    isEmpty: true,
+    name: '\u00A0 - \u00A0',
+    delay: '\u00A0 - \u00A0'
+  }],
   recordingState: PAUSED,
   position: 0,
   lastDrumPadTime: null,

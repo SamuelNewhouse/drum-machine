@@ -1,5 +1,5 @@
 import { PAUSED, RECORDING } from '../actions';
-import pads from '../data/pads'
+import pads from '../data/pads';
 
 const initialState = {
   recordingData: [],
@@ -7,8 +7,7 @@ const initialState = {
   position: 0,
   lastDrumPadTime: null,
   lastDrumPad: null
-};
-for (let key of pads.keys())
+}; for (let key of pads.keys())
   initialState[key] = "";
 
 const actionTypeHandlers = {

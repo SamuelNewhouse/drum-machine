@@ -46,7 +46,7 @@ class Record extends Component {
               let classes = "record-entry";
               if (recordingData[index].playing)
                 classes += " playing";
-              if (index === position - 1)
+              if (index === position)
                 classes += " selected";
 
               return <div key={index} className={classes}> {value.name} - {value.delay} </div>

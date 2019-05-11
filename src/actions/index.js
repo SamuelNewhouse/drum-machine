@@ -40,7 +40,6 @@ export function setRecording(recording) {
 
 //=============================================================================
 // Thunks
-
 export function playPad(letter) {
   return (dispatch, getState) => {
     dispatch(startPad(letter));
@@ -51,7 +50,7 @@ export function playPad(letter) {
     if (recordingState === RECORDING)
       dispatch(recordPad(letter));
 
-    if( recordingState === PLAYING || recordingState === RECORDING )
+    if (recordingState === PLAYING || recordingState === RECORDING)
       dispatch(playLine(position));
   }
 }
@@ -86,8 +85,10 @@ export function continuePlayRecording() {
       const { letter, delay } = recordingData[position];
       dispatch(playPad(letter));
 
-      dispatch(setRecordingPosition(position + 1));
-      setTimeout(() => dispatch(continuePlayRecording()), delay);
+      setTimeout(() => {
+        dispatch(setRecordingPosition(position + 1));
+        dispatch(continuePlayRecording())
+      }, delay);
     }
   }
 }

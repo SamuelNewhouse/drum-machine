@@ -40,8 +40,11 @@ const actionTypeHandlers = {
       delay
     }
 
+    const recordingData = [...state.recordingData];
+    recordingData.splice(state.position, 0, newRecord);
+
     const updates = {
-      recordingData: [...state.recordingData, newRecord],
+      recordingData,
       lastDrumPadTime: now,
       position: state.position + 1
     }

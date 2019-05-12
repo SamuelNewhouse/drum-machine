@@ -5,6 +5,9 @@ export const RECORD_PAD = 'RECORD_PAD';
 export const START_LINE = 'START_LINE';
 export const END_LINE = 'END_LINE';
 
+export const ADD_TIMEOUT = 'ADD_TIMEOUT';
+export const CLEAR_ALL_TIMEOUTS = 'CLEAR_ALL_TIMEOUTS';
+
 export const SET_RECORDING_STATE = 'SET_RECORDING_STATE';
 export const SET_RECORDING_POSITION = 'SET_RECORDING_POSITION';
 export const SET_RECORDING = 'SET_RECORDING';
@@ -28,8 +31,11 @@ export function startLine(position) {
 export function endLine(position) {
   return { type: END_LINE, position }
 }
-export function setRecordingState(recordingState) {
-  return { type: SET_RECORDING_STATE, recordingState }
+export function addTimeout(timeout) {
+  return { type: ADD_TIMEOUT, timeout }
+}
+export function clearAllTimeouts() {
+  return { type: CLEAR_ALL_TIMEOUTS }
 }
 export function setRecordingPosition(position) {
   return { type: SET_RECORDING_POSITION, position }
@@ -40,6 +46,18 @@ export function setRecording(recording) {
 
 //=============================================================================
 // Thunks
+export function setRecordingState(recordingState) {
+  return (dispatch, getState) => {
+    const newState = recordingState;
+    const oldState = getState().recordingState;
+
+    if (newState !== oldState)
+      dispatch(clearAllTimeouts())
+
+    dispatch({ type: SET_RECORDING_STATE, recordingState });
+  }
+}
+
 export function playPad(letter) {
   return (dispatch, getState) => {
     dispatch(startPad(letter));
@@ -64,8 +82,8 @@ export function playLine(position) {
 
 export function beginPlayRecording() {
   return (dispatch, getState) => {
-    const {position, recordingData} = getState();
-    if(position >= recordingData.length - 1)
+    const { position, recordingData } = getState();
+    if (position >= recordingData.length - 1)
       dispatch(setRecordingPosition(0));
 
     dispatch(setRecordingState(PLAYING));
@@ -77,10 +95,12 @@ export function continuePlayRecording() {
   return (dispatch, getState) => {
     const { recordingData, recordingState, position } = getState();
 
-    if (recordingState !== PLAYING)
+    if (recordingState !== PLAYING) {
+      console.log('TEST: continuePlayRecording called while not playing');
       return;
+    }
 
-    if (position >= recordingData.length) {
+    if (position >= recordingData.length - 1) {
       dispatch(setRecordingState(PAUSED));
       dispatch(setRecordingPosition(0));
     }
@@ -88,10 +108,12 @@ export function continuePlayRecording() {
       const { letter, delay } = recordingData[position];
       dispatch(playPad(letter));
 
-      setTimeout(() => {
+      const trackedTimeout = setTimeout(() => {
         dispatch(setRecordingPosition(position + 1));
         dispatch(continuePlayRecording())
       }, delay);
+
+      dispatch(addTimeout(trackedTimeout));
     }
   }
 }

@@ -10,7 +10,8 @@ const initialState = {
   recordingState: PAUSED,
   position: 0,
   lastDrumPadTime: null,
-  lastDrumPad: null
+  lastDrumPad: null,
+  timeouts: []
 }; for (let key of pads.keys())
   initialState[key] = "";
 
@@ -56,6 +57,37 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
+  START_LINE: function (state, action) {
+    const recordingData = [...state.recordingData];
+    recordingData[action.position].playing = true;
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  END_LINE: function (state, action) {
+    const recordingData = [...state.recordingData];
+    recordingData[action.position].playing = false;
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  ADD_TIMEOUT: function(state, action) {
+    const timeouts = [...state.timeouts, action.timeout];
+
+    const updates = { timeouts };
+    return Object.assign({}, state, updates);
+  },
+
+  CLEAR_ALL_TIMEOUTS: function(state) {
+    for(let t of state.timeouts)
+      clearTimeout(t);
+
+    const updates = [];
+    return Object.assign({}, state, updates);
+  },
+
   SET_RECORDING_STATE: function (state, action) {
     const newState = action.recordingState;
     const oldState = state.recordingState;
@@ -72,22 +104,6 @@ const actionTypeHandlers = {
     const updates = { position: action.position }
     return Object.assign({}, state, updates);
   },
-
-  START_LINE: function (state, action) {
-    const recordingData = [...state.recordingData];
-    recordingData[action.position].playing = true;
-
-    const updates = { recordingData }
-    return Object.assign({}, state, updates);
-  },
-
-  END_LINE: function (state, action) {
-    const recordingData = [...state.recordingData];
-    recordingData[action.position].playing = false;
-
-    const updates = { recordingData }
-    return Object.assign({}, state, updates);
-  }
 }
 
 const reducer = (state = initialState, action) => {

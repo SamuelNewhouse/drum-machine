@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, setRecordingPosition } from '../actions';
+import Button from './Button';
 
 import first from '../svg/first.svg';
 import play from '../svg/play3.svg';
@@ -25,6 +26,7 @@ class Record extends Component {
   render() {
     const {
       recordingData,
+      recordingState,
       position,
       playRecording,
       pauseRecording,
@@ -33,12 +35,37 @@ class Record extends Component {
 
     return (
       <>
-        <div id="recording-top-bar">
-          <button type="button" onMouseDown={() => setRecordingPosition(0)}><img alt="First" src={first}></img></button>
-          <button type="button" onMouseDown={playRecording}><img alt="Play" src={play}></img></button>
-          <button type="button" onMouseDown={pauseRecording}><img alt="Pause" src={pause}></img></button>
-          <button type="button" onMouseDown={startRecording}><img alt="Record" src={record}></img></button>
-          <button type="button" onMouseDown={() => setRecordingPosition(recordingData.length - 1)}><img alt="Last" src={last}></img></button>
+        <div id="recording-top-bar" className="button-bar">
+          <Button
+            alt="First"
+            src={first}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={() => setRecordingPosition(0)}
+          />
+          <Button
+            alt="Play"
+            src={play}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={playRecording}
+          />
+          <Button
+            alt="Pause"
+            src={pause}
+            disabled={recordingState === PAUSED}
+            onMouseDown={pauseRecording}
+          />
+          <Button
+            alt="Record"
+            src={record}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={startRecording}
+          />
+          <Button
+            alt="Last"
+            src={last}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={() => setRecordingPosition(recordingData.length - 1)}
+          />
         </div>
         <div id="recording" ref={this.recordingDivRef}>
           <div>
@@ -54,7 +81,7 @@ class Record extends Component {
             )}
           </div>
         </div>
-        <div id="recording-bottom-bar">
+        <div id="recording-bottom-bar" className="button-bar">
           <button type="button"><img alt="Copy" src={copy}></img></button>
           <button type="button"><img alt="Paste" src={paste}></img></button>
           <button type="button"><img alt="Clear" src={clear}></img></button>
@@ -67,6 +94,7 @@ class Record extends Component {
 const mapStateToProps = state => {
   return {
     recordingData: state.recordingData,
+    recordingState: state.recordingState,
     position: state.position
   }
 }

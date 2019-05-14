@@ -80,7 +80,7 @@ class Record extends Component {
           <Button
             alt="Last"
             src={last}
-            disabled={recordingState !== PAUSED}
+            disabled={recordingState !== PAUSED || recordingData.length < 2}
             onMouseDown={() => setRecordingPosition(recordingData.length - 1)}
           />
         </div>

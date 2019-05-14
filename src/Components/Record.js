@@ -18,26 +18,24 @@ class Record extends Component {
     this.recordingDivRef = React.createRef();
   }
 
-  componentDidUpdate({position}) {
-    let curPosition = this.props.position - 1;
-    const lastPosition = position - 1;
+  componentDidUpdate() {
+    const recordingDiv = this.recordingDivRef.current;
+    const curPosition = this.props.position;
 
-    if (curPosition < 0) {
-      this.recordingDivRef.current.scrollTo(0,0);
+    if (curPosition < 1) {
+      recordingDiv.scrollTo(0, 0);
       return;
     }
 
-    const positionDifference = Math.abs(curPosition - lastPosition);
-    const delay = this.props.recordingData[curPosition].delay;
+    const minScrollPixel = recordingDiv.scrollTop;
+    const maxScrollPixel = minScrollPixel + recordingDiv.clientHeight;
+    const curRecordEntry = recordingDiv.querySelector(`.record-entry:nth-of-type(${curPosition})`);
 
     let behavior = 'smooth';
-    if (delay < 100 || positionDifference > 1 )
+    if (curRecordEntry.offsetTop < minScrollPixel || curRecordEntry.offsetTop > maxScrollPixel)
       behavior = 'auto';
 
-    const recordingDiv = this.recordingDivRef.current;
-    const s = recordingDiv.querySelectorAll('.record-entry')[curPosition];
-
-    s.scrollIntoView({ behavior });
+    curRecordEntry.scrollIntoView({ behavior });
   }
 
   render() {

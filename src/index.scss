@@ -116,3 +116,9 @@ footer {
     box-shadow: 0px 0px 4px #001122;
   }
 }
+
+.button-bar {
+  button:disabled img {
+    opacity: 0.2;
+  }
+}

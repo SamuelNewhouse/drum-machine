@@ -62,7 +62,7 @@ class Record extends Component {
           <Button
             alt="Play"
             src={play}
-            disabled={recordingState !== PAUSED}
+            disabled={recordingState !== PAUSED || recordingData.length < 2}
             onMouseDown={playRecording}
           />
           <Button

@@ -11,6 +11,7 @@ import last from '../svg/last.svg';
 import copy from '../svg/copy.svg';
 import paste from '../svg/paste.svg';
 import clear from '../svg/bin.svg';
+import Recording from './Recording';
 
 class Record extends Component {
   constructor(props) {
@@ -42,7 +43,6 @@ class Record extends Component {
     const {
       recordingData,
       recordingState,
-      position,
       playRecording,
       pauseRecording,
       startRecording,
@@ -83,18 +83,7 @@ class Record extends Component {
           />
         </div>
         <div id="recording" ref={this.recordingDivRef}>
-          <div>
-            {recordingData.map((value, index) => {
-              let classes = "record-entry";
-              if (recordingData[index].playing)
-                classes += " playing";
-              if (index === position)
-                classes += " selected";
-
-              return <div key={index} className={classes}> {value.name} - {value.delay} </div>
-            }
-            )}
-          </div>
+          <Recording />
         </div>
         <div id="recording-bottom-bar" className="button-bar">
           <button type="button"><img alt="Copy" src={copy}></img></button>

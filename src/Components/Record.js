@@ -14,31 +14,6 @@ import clear from '../svg/bin.svg';
 import Recording from './Recording';
 
 class Record extends Component {
-  constructor(props) {
-    super(props);
-    this.recordingDivRef = React.createRef();
-  }
-
-  componentDidUpdate() {
-    const recordingDiv = this.recordingDivRef.current;
-    const curPosition = this.props.position;
-
-    if (curPosition < 1) {
-      recordingDiv.scrollTo(0, 0);
-      return;
-    }
-
-    const minScrollPixel = recordingDiv.scrollTop;
-    const maxScrollPixel = minScrollPixel + recordingDiv.clientHeight;
-    const curRecordEntry = recordingDiv.querySelector(`.record-entry:nth-of-type(${curPosition})`);
-
-    let behavior = 'smooth';
-    if (curRecordEntry.offsetTop < minScrollPixel || curRecordEntry.offsetTop > maxScrollPixel)
-      behavior = 'auto';
-
-    curRecordEntry.scrollIntoView({ behavior });
-  }
-
   render() {
     const {
       recordingData,
@@ -82,9 +57,9 @@ class Record extends Component {
             onMouseDown={() => setRecordingPosition(recordingData.length - 1)}
           />
         </div>
-        <div id="recording" ref={this.recordingDivRef}>
-          <Recording />
-        </div>
+
+        <Recording />
+
         <div id="recording-bottom-bar" className="button-bar">
           <button type="button"><img alt="Copy" src={copy}></img></button>
           <button type="button"><img alt="Paste" src={paste}></img></button>

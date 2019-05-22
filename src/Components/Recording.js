@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { PAUSED, setRecordingPosition } from '../actions';
+import { PAUSED, setRecordingPosition, RECORDING } from '../actions';
 import RecordEntry from './RecordEntry';
 
 const Recording = ({ recordingData, recordingState, position, setRecordingPosition }) => {
@@ -11,9 +11,10 @@ const Recording = ({ recordingData, recordingState, position, setRecordingPositi
       () => undefined;
   }
 
-
   const makeRecordEntry = (value, index) => {
     let classes = "record-entry";
+    if( recordingState === RECORDING)
+      classes += " recording";
     if (recordingData[index].playing)
       classes += " playing";
     if (index === position)

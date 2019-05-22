@@ -105,17 +105,37 @@ footer {
 
 .record-entry {
   transition: all 0.05s ease-in-out;
+
   margin: 0 2px;
   padding: 0 2px;
   border: 1px solid transparent;
+
+  .edit {
+    margin-left: 5px;
+    visibility: hidden;
+    padding: 0 2px;
+  }
+  &.selected:not(.playing) .edit {
+    visibility: visible;
+  }
+
   &.playing {
-    background: #aaa;
+    .info {
+      background: #aaa;
+    }
+    .edit {
+      visibility: hidden;
+    }
   }
   &.selected, &.playing {
-    border: 1px solid black;
-    border-radius: 3px;
-    box-shadow: 0px 0px 4px #001122;
+    .info {
+      border: 1px solid black;
+      border-radius: 3px;
+      box-shadow: 0px 0px 4px #001122;
+    }
   }
+
+
 }
 
 .button-bar {

@@ -92,6 +92,43 @@ footer {
     position: absolute;
     margin: 2px;
   }
+
+  &.state-paused {
+    .entry-selected .edit {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.record-entry {
+  transition: all 0.05s ease-in-out;
+  margin: 0 2px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+
+  .edit {
+    line-height: 100%;
+    margin: 0;
+    margin-left: 5px;
+    visibility: hidden;
+    opacity: 0;
+    padding: 2px 4px;
+    transition: opacity 0.5s ease-in;
+  }
+
+  &.entry-playing {
+    .info {
+      background: #aaa;
+    }
+  }
+  &.entry-selected, &.entry-playing {
+    .info {
+      border: 1px solid black;
+      border-radius: 3px;
+      box-shadow: 0px 0px 4px #001122;
+    }
+  }
 }
 
 #recording-bottom-bar {
@@ -101,41 +138,6 @@ footer {
 #volume {
   grid-area: volume;
   background: green;
-}
-
-.record-entry {
-  transition: all 0.05s ease-in-out;
-
-  margin: 0 2px;
-  padding: 0 2px;
-  border: 1px solid transparent;
-
-  .edit {
-    margin-left: 5px;
-    visibility: hidden;
-    padding: 0 2px;
-  }
-  &.selected:not(.playing) .edit {
-    visibility: visible;
-  }
-
-  &.playing {
-    .info {
-      background: #aaa;
-    }
-    .edit {
-      visibility: hidden;
-    }
-  }
-  &.selected, &.playing {
-    .info {
-      border: 1px solid black;
-      border-radius: 3px;
-      box-shadow: 0px 0px 4px #001122;
-    }
-  }
-
-
 }
 
 .button-bar {

@@ -39,15 +39,13 @@ class Recording extends Component {
   }
 
   makeRecordEntry = (value, index) => {
-    const { recordingData, recordingState, position } = this.props;
+    const { recordingData, position } = this.props;
 
     let classes = "record-entry";
-    if (recordingState === RECORDING)
-      classes += " recording";
     if (recordingData[index].playing)
-      classes += " playing";
+      classes += " entry-playing";
     if (index === position)
-      classes += " selected";
+      classes += " entry-selected";
 
     return <RecordEntry
       className={classes}
@@ -58,10 +56,17 @@ class Recording extends Component {
   }
 
   render() {
-    const { recordingData } = this.props;
+    const { recordingData, recordingState } = this.props;
+
     return (
-      <div id="recording" ref={this.recordingDivRef}>
-        <div> {recordingData.map(this.makeRecordEntry)} </div>
+      <div
+        id="recording"
+        className={"state-" + recordingState.toLowerCase()}
+        ref={this.recordingDivRef}
+      >
+        <div>
+          {recordingData.map(this.makeRecordEntry)}
+        </div>
       </div>
     )
   }

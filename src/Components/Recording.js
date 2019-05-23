@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { PAUSED, setRecordingPosition, RECORDING } from '../actions';
+import { PAUSED, setRecordingPosition } from '../actions';
 import RecordEntry from './RecordEntry';
 
 class Recording extends Component {

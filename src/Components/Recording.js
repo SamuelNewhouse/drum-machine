@@ -48,6 +48,7 @@ class Recording extends Component {
       classes += " entry-selected";
 
     return <RecordEntry
+      key={index}
       className={classes}
       name={value.name}
       delay={value.delay}

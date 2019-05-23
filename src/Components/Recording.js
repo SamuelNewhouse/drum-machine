@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { PAUSED, setRecordingPosition } from '../actions';
+import { PAUSED, setRecordingPosition, EDITING } from '../actions';
 import RecordEntry from './RecordEntry';
 
 class Recording extends Component {
@@ -39,19 +39,25 @@ class Recording extends Component {
   }
 
   makeRecordEntry = (value, index) => {
-    const { recordingData, position } = this.props;
+    const { recordingData, recordingState, position } = this.props;
+
+    let isBeingEdited = false;
+    if (recordingState === EDITING && index === position)
+      isBeingEdited = true;
 
     let classes = "entry";
-    if (recordingData[index].playing)
-      classes += " entry-playing";
     if (index === position)
       classes += " entry-selected";
+    if (recordingData[index].playing)
+      classes += " entry-playing";
 
     return <RecordEntry
       key={index}
-      className={classes}
+      position={index}
+      classes={classes}
       name={value.name}
       delay={value.delay}
+      isBeingEdited={isBeingEdited}
       onMouseDown={this.getMouseDownFunction(index)}
     />
   }

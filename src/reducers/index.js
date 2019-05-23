@@ -2,7 +2,7 @@ import { PAUSED, RECORDING } from '../actions';
 import pads from '../data/pads';
 
 const initialState = {
-  recordingData: [{ // Used for blank recording and entry cell
+  recordingData: [{ // Used for blank entry
     isEmpty: true,
     name: '\u00A0 - \u00A0',
     delay: '\u00A0 - \u00A0'
@@ -16,7 +16,7 @@ const initialState = {
   initialState[key] = "";
 
 const actionTypeHandlers = {
-  START_PAD: function (state, action) {
+  PLAY_PAD: function (state, action) {
     const updates = {
       [action.letter]: 'pressed',
       lastDrumPad: action.letter,
@@ -57,7 +57,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  START_LINE: function (state, action) {
+  PLAY_ENTRY: function (state, action) {
     const recordingData = [...state.recordingData];
     recordingData[action.position].playing = true;
 
@@ -65,7 +65,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  END_LINE: function (state, action) {
+  END_ENTRY: function (state, action) {
     const recordingData = [...state.recordingData];
     recordingData[action.position].playing = false;
 

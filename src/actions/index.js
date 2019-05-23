@@ -1,9 +1,11 @@
-export const START_PAD = 'START_PAD';
+export const PLAY_PAD = 'PLAY_PAD';
 export const END_PAD = 'END_PAD';
 export const RECORD_PAD = 'RECORD_PAD';
 
-export const START_LINE = 'START_LINE';
-export const END_LINE = 'END_LINE';
+export const PLAY_ENTRY = 'PLAY_ENTRY';
+export const END_ENTRY = 'END_ENTRY';
+export const EDIT_ENTRY = 'END_ENTRY';
+export const DELETE_ENTRY = 'END_ENTRY';
 
 export const ADD_TIMEOUT = 'ADD_TIMEOUT';
 export const CLEAR_ALL_TIMEOUTS = 'CLEAR_ALL_TIMEOUTS';
@@ -15,9 +17,10 @@ export const SET_RECORDING = 'SET_RECORDING';
 export const PLAYING = 'PLAYING';
 export const PAUSED = 'PAUSED';
 export const RECORDING = 'RECORDING';
+export const EDITING = 'EDITING';
 
 export function startPad(letter) {
-  return { type: START_PAD, letter }
+  return { type: PLAY_PAD, letter }
 }
 export function endPad(letter) {
   return { type: END_PAD, letter }
@@ -25,11 +28,11 @@ export function endPad(letter) {
 export function recordPad(letter) {
   return { type: RECORD_PAD, letter }
 }
-export function startLine(position) {
-  return { type: START_LINE, position }
+export function playEntry(position) {
+  return { type: PLAY_ENTRY, position }
 }
-export function endLine(position) {
-  return { type: END_LINE, position }
+export function endEntry(position) {
+  return { type: END_ENTRY, position }
 }
 export function addTimeout(timeout) {
   return { type: ADD_TIMEOUT, timeout }
@@ -75,8 +78,8 @@ export function playPad(letter) {
 
 export function playLine(position) {
   return dispatch => {
-    dispatch(startLine(position));
-    setTimeout(() => dispatch(endLine(position)), 200);
+    dispatch(playEntry(position));
+    setTimeout(() => dispatch(endEntry(position)), 200);
   }
 }
 

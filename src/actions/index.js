@@ -34,6 +34,9 @@ export function playEntry(position) {
 export function endEntry(position) {
   return { type: END_ENTRY, position }
 }
+export function editEntry(position, name, delay) {
+  return { type: EDIT_ENTRY, data: {position, name, delay} }
+}
 export function addTimeout(timeout) {
   return { type: ADD_TIMEOUT, timeout }
 }

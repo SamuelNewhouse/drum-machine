@@ -91,11 +91,14 @@ footer {
   }
 }
 
-.record-entry {
+.entry {
   transition: all 0.05s ease-in-out;
   margin: 0 2px;
-  padding: 0 2px;
   border: 1px solid transparent;
+
+  .info {
+    padding: 0 4px;
+  }
 
   .edit {
     line-height: 100%;

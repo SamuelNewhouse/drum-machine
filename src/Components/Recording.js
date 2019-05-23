@@ -20,7 +20,7 @@ class Recording extends Component {
 
     const minScrollPixel = recordingDiv.scrollTop;
     const maxScrollPixel = minScrollPixel + recordingDiv.clientHeight;
-    const curRecordEntry = recordingDiv.querySelector(`.record-entry:nth-of-type(${curPosition})`);
+    const curRecordEntry = recordingDiv.querySelector(`.entry:nth-of-type(${curPosition})`);
 
     let behavior = 'smooth';
     if (curRecordEntry.offsetTop < minScrollPixel || curRecordEntry.offsetTop > maxScrollPixel)
@@ -41,7 +41,7 @@ class Recording extends Component {
   makeRecordEntry = (value, index) => {
     const { recordingData, position } = this.props;
 
-    let classes = "record-entry";
+    let classes = "entry";
     if (recordingData[index].playing)
       classes += " entry-playing";
     if (index === position)

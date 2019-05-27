@@ -4,8 +4,8 @@ export const RECORD_PAD = 'RECORD_PAD';
 
 export const PLAY_ENTRY = 'PLAY_ENTRY';
 export const END_ENTRY = 'END_ENTRY';
-export const EDIT_ENTRY = 'END_ENTRY';
-export const DELETE_ENTRY = 'END_ENTRY';
+export const EDIT_ENTRY = 'EDIT_ENTRY';
+export const DELETE_ENTRY = 'DELETE_ENTRY';
 
 export const ADD_TIMEOUT = 'ADD_TIMEOUT';
 export const CLEAR_ALL_TIMEOUTS = 'CLEAR_ALL_TIMEOUTS';
@@ -34,8 +34,8 @@ export function playEntry(position) {
 export function endEntry(position) {
   return { type: END_ENTRY, position }
 }
-export function editEntry(position, name, delay) {
-  return { type: EDIT_ENTRY, data: {position, name, delay} }
+export function editEntry(position, letter, delay) {
+  return { type: EDIT_ENTRY, data: {position, letter, delay} }
 }
 export function addTimeout(timeout) {
   return { type: ADD_TIMEOUT, timeout }

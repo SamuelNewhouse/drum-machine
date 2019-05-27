@@ -84,9 +84,11 @@ footer {
   }
 
   &.state-paused {
-    .entry-selected .edit {
-      visibility: visible;
-      opacity: 1;
+    .entry-selected {
+      .edit, .delete {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 }
@@ -100,7 +102,7 @@ footer {
     padding: 0 4px;
   }
 
-  .edit {
+  .edit, .delete {
     line-height: 100%;
     margin: 0;
     margin-left: 5px;

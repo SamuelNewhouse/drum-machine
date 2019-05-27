@@ -41,10 +41,6 @@ class Recording extends Component {
   makeRecordEntry = (value, index) => {
     const { recordingData, recordingState, position } = this.props;
 
-    let isBeingEdited = false;
-    if (recordingState === EDITING && index === position)
-      isBeingEdited = true;
-
     let classes = "entry";
     if (index === position)
       classes += " entry-selected";
@@ -57,7 +53,7 @@ class Recording extends Component {
       classes={classes}
       name={value.name}
       delay={value.delay}
-      isBeingEdited={isBeingEdited}
+      isBeingEdited={recordingState === EDITING && index === position}
       onMouseDown={this.getMouseDownFunction(index)}
     />
   }

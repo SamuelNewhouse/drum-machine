@@ -9,7 +9,7 @@ const RecordEntry = ({ position, classes, name, delay, isBeingEdited, onMouseDow
       <span className="info">{name} - {delay}</span>
       <button type="button" className="edit" onClick={startEdit}>Edit</button>
       <button type="button" className="delete" onClick={() => deleteEntry(position)}>X</button>
-      {isBeingEdited && <EditForm position={position}/> /* Only have a single edit form in the DOM at a time. */}
+      {isBeingEdited && <EditForm position={position} />}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, setRecordingPosition } from '../actions';
+import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, setRecordingPosition, EDITING } from '../actions';
 import Button from './Button';
 
 import first from '../svg/first.svg';
@@ -41,7 +41,7 @@ class Record extends Component {
           <Button
             alt="Pause"
             src={pause}
-            disabled={recordingState === PAUSED}
+            disabled={recordingState === PAUSED || recordingState === EDITING}
             onMouseDown={pauseRecording}
           />
           <Button

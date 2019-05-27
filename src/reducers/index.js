@@ -73,7 +73,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  EDIT_ENTRY: function(state, action) {
+  EDIT_ENTRY: function (state, action) {
     const data = action.data;
     const recordingData = [...state.recordingData];
     const entry = recordingData[data.position];
@@ -83,19 +83,26 @@ const actionTypeHandlers = {
     entry.delay = data.delay;
 
     const updates = { recordingData }
-
     return Object.assign({}, state, updates);
   },
 
-  ADD_TIMEOUT: function(state, action) {
+  DELETE_ENTRY: function (state, action) {
+    const recordingData = [...state.recordingData];
+    recordingData.splice(action.position, 1);
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  ADD_TIMEOUT: function (state, action) {
     const timeouts = [...state.timeouts, action.timeout];
 
     const updates = { timeouts };
     return Object.assign({}, state, updates);
   },
 
-  CLEAR_ALL_TIMEOUTS: function(state) {
-    for(let t of state.timeouts)
+  CLEAR_ALL_TIMEOUTS: function (state) {
+    for (let t of state.timeouts)
       clearTimeout(t);
 
     const updates = [];

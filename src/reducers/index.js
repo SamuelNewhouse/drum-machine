@@ -73,6 +73,20 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
+  EDIT_ENTRY: function(state, action) {
+    const data = action.data;
+    const recordingData = [...state.recordingData];
+    const entry = recordingData[data.position];
+
+    entry.name = pads.get(data.letter).id;
+    entry.letter = data.letter;
+    entry.delay = data.delay;
+
+    const updates = { recordingData }
+
+    return Object.assign({}, state, updates);
+  },
+
   ADD_TIMEOUT: function(state, action) {
     const timeouts = [...state.timeouts, action.timeout];
 

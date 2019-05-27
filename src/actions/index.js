@@ -37,6 +37,9 @@ export function endEntry(position) {
 export function editEntry(position, letter, delay) {
   return { type: EDIT_ENTRY, data: {position, letter, delay} }
 }
+export function deleteEntry(position) {
+  return { type: DELETE_ENTRY, position }
+}
 export function addTimeout(timeout) {
   return { type: ADD_TIMEOUT, timeout }
 }

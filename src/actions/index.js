@@ -13,6 +13,7 @@ export const CLEAR_ALL_TIMEOUTS = 'CLEAR_ALL_TIMEOUTS';
 export const SET_RECORDING_STATE = 'SET_RECORDING_STATE';
 export const SET_RECORDING_POSITION = 'SET_RECORDING_POSITION';
 export const SET_RECORDING = 'SET_RECORDING';
+export const SET_VOLUME = 'SET_VOLUME';
 
 export const PLAYING = 'PLAYING';
 export const PAUSED = 'PAUSED';
@@ -51,6 +52,9 @@ export function setRecordingPosition(position) {
 }
 export function setRecording(recording) {
   return { type: SET_RECORDING, recording }
+}
+export function setVolume(volume) {
+  return { type: SET_VOLUME, volume }
 }
 
 //=============================================================================

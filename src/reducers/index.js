@@ -3,11 +3,11 @@ import pads from '../data/pads';
 
 const initialState = {
   recordingData: [{ // Used for blank entry
-    isEmpty: true,
     name: '\u00A0 - \u00A0',
     delay: '\u00A0 - \u00A0'
   }],
   recordingState: PAUSED,
+  volume: 100,
   position: 0,
   lastDrumPadTime: null,
   lastDrumPad: null,
@@ -125,6 +125,11 @@ const actionTypeHandlers = {
     const updates = { position: action.position }
     return Object.assign({}, state, updates);
   },
+
+  SET_VOLUME: function (state, action) {
+    const updates = {volume: action.volume}
+    return Object.assign({}, state, updates);
+  }
 }
 
 const reducer = (state = initialState, action) => {

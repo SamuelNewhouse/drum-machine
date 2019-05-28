@@ -22,13 +22,13 @@
 #drum-machine {
   align-items: stretch;
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
-  "pads display volume"
-  "pads recording-top-bar volume"
-  "pads recording volume"
-  "pads recording-bottom-bar volume";
+  "pads display"
+  "pads recording-top-bar"
+  "pads recording"
+  "volume recording-bottom-bar";
   max-width: 1024px;
   margin: auto;
 }
@@ -133,8 +133,8 @@ footer {
 #volume {
   grid-area: volume;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  padding: 0 10px;
 
   img {
     width: 20px;
@@ -143,11 +143,8 @@ footer {
 
   input
   {
+    margin: 0 10px;
     flex: 1 1 auto;
-    writing-mode: bt-lr; /* IE */
-    -webkit-appearance: slider-vertical; /* WebKit */
-    width: 8px;
-    margin: 8px 0;
   }
 }
 

@@ -8,12 +8,12 @@ import volumeDecrease from '../svg/volume-decrease.svg';
 const Volume = ({ volume, setVolume }) => {
   return (
     <div id="volume">
-      <img src={volumeIncrease} alt="Increase Volume" />
-      <input type="range" orient="vertical" min="0" max="100"
+      <img src={volumeDecrease} alt="Decrease Volume" />
+      <input type="range" min="0" max="100"
         value={volume}
         onChange={event => setVolume(event.target.value)}
       />
-      <img src={volumeDecrease} alt="Decrease Volume" />
+      <img src={volumeIncrease} alt="Increase Volume" />
     </div>
   )
 }

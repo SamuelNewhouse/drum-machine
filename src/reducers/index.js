@@ -1,4 +1,9 @@
-import { PAUSED, RECORDING } from '../actions';
+import {
+  PLAY_PAD, END_PAD, RECORD_PAD, PLAY_ENTRY,
+  END_ENTRY, EDIT_ENTRY, DELETE_ENTRY,
+  ADD_TIMEOUT, CLEAR_ALL_TIMEOUTS,
+  SET_RECORDING_STATE, SET_RECORDING_POSITION, SET_VOLUME,
+  PAUSED, RECORDING } from '../actions';
 import pads from '../data/pads';
 
 const initialState = {
@@ -16,7 +21,7 @@ const initialState = {
   initialState[key] = "";
 
 const actionTypeHandlers = {
-  PLAY_PAD: function (state, action) {
+  [PLAY_PAD]: function (state, action) {
     const updates = {
       [action.letter]: 'pressed',
       lastDrumPad: action.letter,
@@ -25,7 +30,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  END_PAD: function (state, action) {
+  [END_PAD]: function (state, action) {
     const updates = {
       [action.letter]: ''
     }
@@ -33,7 +38,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  RECORD_PAD: function (state, action) {
+  [RECORD_PAD]: function (state, action) {
     const now = Date.now();
     const lastDrumPadTime = state.lastDrumPadTime || now;
     const delay = now - lastDrumPadTime;
@@ -57,7 +62,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  PLAY_ENTRY: function (state, action) {
+  [PLAY_ENTRY]: function (state, action) {
     const recordingData = [...state.recordingData];
     recordingData[action.position].playing = true;
 
@@ -65,7 +70,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  END_ENTRY: function (state, action) {
+  [END_ENTRY]: function (state, action) {
     const recordingData = [...state.recordingData];
     recordingData[action.position].playing = false;
 
@@ -73,7 +78,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  EDIT_ENTRY: function (state, action) {
+  [EDIT_ENTRY]: function (state, action) {
     const data = action.data;
     const recordingData = [...state.recordingData];
     const entry = recordingData[data.position];
@@ -86,7 +91,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  DELETE_ENTRY: function (state, action) {
+  [DELETE_ENTRY]: function (state, action) {
     const recordingData = [...state.recordingData];
     recordingData.splice(action.position, 1);
 
@@ -94,14 +99,14 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  ADD_TIMEOUT: function (state, action) {
+  [ADD_TIMEOUT]: function (state, action) {
     const timeouts = [...state.timeouts, action.timeout];
 
     const updates = { timeouts };
     return Object.assign({}, state, updates);
   },
 
-  CLEAR_ALL_TIMEOUTS: function (state) {
+  [CLEAR_ALL_TIMEOUTS]: function (state) {
     for (let t of state.timeouts)
       clearTimeout(t);
 
@@ -109,7 +114,7 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  SET_RECORDING_STATE: function (state, action) {
+  [SET_RECORDING_STATE]: function (state, action) {
     const newState = action.recordingState;
     const oldState = state.recordingState;
 
@@ -121,12 +126,12 @@ const actionTypeHandlers = {
     return Object.assign({}, state, updates);
   },
 
-  SET_RECORDING_POSITION: function (state, action) {
+  [SET_RECORDING_POSITION]: function (state, action) {
     const updates = { position: action.position }
     return Object.assign({}, state, updates);
   },
 
-  SET_VOLUME: function (state, action) {
+  [SET_VOLUME]: function (state, action) {
     const updates = {volume: action.volume}
     return Object.assign({}, state, updates);
   }

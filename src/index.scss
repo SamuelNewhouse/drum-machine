@@ -44,6 +44,7 @@ footer {
   gap: 20px;
   padding: 20px;
   border: 1px solid black;
+  border-bottom: none;
 
   button {
     transition: all 0.05s ease-in-out;
@@ -65,10 +66,15 @@ footer {
   grid-area: display;
   font-size: 1.5em;
   text-align: center;
+  border: 1px solid black;
+  border-left: none;
 }
 
 #recording-top-bar {
   grid-area: recording-top-bar;
+  border: 1px solid black;
+  border-left: none;
+  border-top: none;
 }
 
 #recording {
@@ -76,6 +82,9 @@ footer {
   position: relative;
   grid-area: recording;
   overflow: auto;
+  border: 1px solid black;
+  border-left: none;
+  border-top: none;
 
   & > div {
     max-height: 100%;
@@ -128,6 +137,9 @@ footer {
 
 #recording-bottom-bar {
   grid-area: recording-bottom-bar;
+  border: 1px solid black;
+  border-left: none;
+  border-top: none;
 }
 
 #volume {
@@ -135,6 +147,8 @@ footer {
   display: flex;
   align-items: center;
   padding: 0 10px;
+  border: 1px solid black;
+  border-top: none;
 
   img {
     width: 20px;

@@ -5,6 +5,7 @@ export const RECORD_PAD = 'RECORD_PAD';
 export const PLAY_ENTRY = 'PLAY_ENTRY';
 export const END_ENTRY = 'END_ENTRY';
 export const EDIT_ENTRY = 'EDIT_ENTRY';
+export const ADD_ENTRY = 'ADD_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 
 export const ADD_TIMEOUT = 'ADD_TIMEOUT';
@@ -37,6 +38,9 @@ export function endEntry(position) {
 }
 export function editEntry(position, letter, delay) {
   return { type: EDIT_ENTRY, data: { position, letter, delay } }
+}
+export function addEntry(letter, delay) { // TODO: Place this in a thunk in action creators.
+  return { type: ADD_ENTRY, data: { letter, delay } }
 }
 export function deleteEntry(position) {
   return { type: DELETE_ENTRY, position }

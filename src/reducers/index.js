@@ -1,9 +1,10 @@
 import {
-  PLAY_PAD, END_PAD, RECORD_PAD, PLAY_ENTRY,
-  END_ENTRY, EDIT_ENTRY, DELETE_ENTRY,
+  PLAY_PAD, END_PAD, RECORD_PAD,
+  PLAY_ENTRY, END_ENTRY, EDIT_ENTRY, DELETE_ENTRY,
   ADD_TIMEOUT, CLEAR_ALL_TIMEOUTS,
   SET_RECORDING_STATE, SET_RECORDING_POSITION, SET_VOLUME,
-  PAUSED, RECORDING } from '../actions';
+  PAUSED, RECORDING
+} from '../actions';
 import pads from '../data/pads';
 
 const initialState = {
@@ -132,7 +133,7 @@ const actionTypeHandlers = {
   },
 
   [SET_VOLUME]: function (state, action) {
-    const updates = {volume: action.volume}
+    const updates = { volume: action.volume }
     return Object.assign({}, state, updates);
   }
 }

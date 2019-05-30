@@ -36,7 +36,7 @@ export function endEntry(position) {
   return { type: END_ENTRY, position }
 }
 export function editEntry(position, letter, delay) {
-  return { type: EDIT_ENTRY, data: {position, letter, delay} }
+  return { type: EDIT_ENTRY, data: { position, letter, delay } }
 }
 export function deleteEntry(position) {
   return { type: DELETE_ENTRY, position }

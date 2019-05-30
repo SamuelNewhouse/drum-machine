@@ -9,8 +9,8 @@ class DrumPad extends Component {
     this.audioRef = React.createRef();
   }
 
-  componentDidUpdate({pressed, volume}) {
-    if(pressed) {
+  componentDidUpdate({ pressed, volume }) {
+    if (pressed) {
       this.buttonRef.current.focus();
       this.audioRef.current.currentTime = 0;
       this.audioRef.current.play();
@@ -31,7 +31,7 @@ class DrumPad extends Component {
         ref={this.buttonRef}
       >
         {letter}
-        <audio id={letter} className="clip" src={url} ref={this.audioRef}/>
+        <audio id={letter} className="clip" src={url} ref={this.audioRef} />
       </button>
     )
   }

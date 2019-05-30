@@ -8,10 +8,7 @@ import {
 import pads from '../data/pads';
 
 const initialState = {
-  recordingData: [{ // Used for blank entry
-    name: '\u00A0 - \u00A0',
-    delay: '\u00A0 - \u00A0'
-  }],
+  recordingData: [],
   recordingState: PAUSED,
   volume: 100,
   position: 0,

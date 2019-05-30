@@ -29,13 +29,13 @@ class Record extends Component {
           <Button
             alt="First"
             src={first}
-            disabled={recordingState !== PAUSED || recordingData.length < 2}
+            disabled={recordingState !== PAUSED || recordingData.length < 1}
             onMouseDown={() => setRecordingPosition(0)}
           />
           <Button
             alt="Play"
             src={play}
-            disabled={recordingState !== PAUSED || recordingData.length < 2}
+            disabled={recordingState !== PAUSED || recordingData.length < 1}
             onMouseDown={playRecording}
           />
           <Button
@@ -53,8 +53,8 @@ class Record extends Component {
           <Button
             alt="Last"
             src={last}
-            disabled={recordingState !== PAUSED || recordingData.length < 2}
-            onMouseDown={() => setRecordingPosition(recordingData.length - 1)}
+            disabled={recordingState !== PAUSED || recordingData.length < 1}
+            onMouseDown={() => setRecordingPosition(recordingData.length)}
           />
         </div>
 

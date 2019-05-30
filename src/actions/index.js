@@ -96,7 +96,7 @@ export function playLine(position) {
 export function beginPlayRecording() {
   return (dispatch, getState) => {
     const { position, recordingData } = getState();
-    if (position >= recordingData.length - 1)
+    if (position >= recordingData.length)
       dispatch(setRecordingPosition(0));
 
     dispatch(setRecordingState(PLAYING));
@@ -113,7 +113,7 @@ export function continuePlayRecording() {
       return;
     }
 
-    if (position >= recordingData.length - 1) {
+    if (position >= recordingData.length) {
       dispatch(setRecordingState(PAUSED));
       dispatch(setRecordingPosition(0));
     }

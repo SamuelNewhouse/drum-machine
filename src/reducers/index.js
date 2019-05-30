@@ -1,6 +1,6 @@
 import {
   PLAY_PAD, END_PAD, RECORD_PAD,
-  PLAY_ENTRY, END_ENTRY, EDIT_ENTRY, DELETE_ENTRY,
+  PLAY_ENTRY, END_ENTRY, EDIT_ENTRY, ADD_ENTRY, DELETE_ENTRY,
   ADD_TIMEOUT, CLEAR_ALL_TIMEOUTS,
   SET_RECORDING_STATE, SET_RECORDING_POSITION, SET_VOLUME,
   PAUSED, RECORDING
@@ -84,6 +84,23 @@ const actionTypeHandlers = {
     entry.name = pads.get(data.letter).id;
     entry.letter = data.letter;
     entry.delay = data.delay;
+
+    const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  [ADD_ENTRY]: function (state, action) {
+    const data = action.data;
+    const recordingData = [...state.recordingData];
+
+    const newEntry = {
+      name: pads.get(data.letter).id,
+      letter: data.letter,
+      playing: false,
+      delay: data.delay
+    }
+
+    recordingData.push(newEntry);
 
     const updates = { recordingData }
     return Object.assign({}, state, updates);

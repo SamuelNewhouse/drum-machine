@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { PAUSED, setRecordingPosition, EDITING } from '../actions';
 import RecordEntry from './RecordEntry';
+import AddEntry from './AddEntry';
+
+// The AddEntry component values for visualization purposes.
+const addEntryValues = {
+  name: '\u00A0 - \u00A0',
+  delay: '\u00A0 - \u00A0'
+}
 
 class Recording extends Component {
   constructor(props) {
@@ -38,29 +45,30 @@ class Recording extends Component {
       () => undefined;
   }
 
-  makeRecordEntry = (value, index) => {
+  makeEntry = ComponentType => {
     const { recordingData, recordingState, position } = this.props;
 
-    let classes = "entry";
-    if (index === position)
-      classes += " entry-selected";
-    if (recordingData[index].playing)
-      classes += " entry-playing";
+    return (value, index) => {
+      let classes = "entry";
+      if (index === position)
+        classes += " entry-selected";
+      if (recordingData[index] && recordingData[index].playing)
+        classes += " entry-playing";
 
-    return <RecordEntry
-      key={index}
-      position={index}
-      classes={classes}
-      name={value.name}
-      delay={value.delay}
-      isBeingEdited={recordingState === EDITING && index === position}
-      onMouseDown={this.getMouseDownFunction(index)}
-    />
+      return <ComponentType
+        key={index}
+        componentPosition={index}
+        classes={classes}
+        name={value.name}
+        delay={value.delay}
+        isBeingEdited={recordingState === EDITING && index === position}
+        onMouseDown={this.getMouseDownFunction(index)}
+      />
+    }
   }
 
   render() {
     const { recordingData, recordingState } = this.props;
-
     return (
       <div
         id="recording"
@@ -68,7 +76,8 @@ class Recording extends Component {
         ref={this.recordingDivRef}
       >
         <div>
-          {recordingData.map(this.makeRecordEntry)}
+          {recordingData.map(this.makeEntry(RecordEntry))}
+          {this.makeEntry(AddEntry)(addEntryValues, recordingData.length)}
         </div>
       </div>
     )

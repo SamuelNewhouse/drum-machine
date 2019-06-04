@@ -2,20 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import pads from '../data/pads';
 import { editEntry, addEntry, playPad } from '../actions';
-import { setRecordingState, setRecordingPosition, PAUSED } from '../actions';
+import { setRecordingState, PAUSED } from '../actions';
 
 class EntryForm extends Component {
   onSubmit = event => {
     event.preventDefault();
     const target = event.target;
-    const { position, isEditMode, editEntry, addEntry, exitEditMode, setRecordingPosition } = this.props;
+    const { position, isEditMode, editEntry, addEntry, exitEditMode } = this.props;
 
     if (isEditMode)
       editEntry(position, target.instrument.value, Number(target.delay.value));
-    else {
+    else
       addEntry(target.instrument.value, Number(target.delay.value));
-      setRecordingPosition(position + 1); // TODO: Place this in a thunk in action creators.
-    }
 
     // TODO: Make this less confusing. There are two different meanings for "EditMode" here.
     exitEditMode();
@@ -63,7 +61,6 @@ const mapDispatchToProps = dispatch => {
     addEntry: (letter, delay) => dispatch(addEntry(letter, delay)),
     exitEditMode: () => dispatch(setRecordingState(PAUSED)),
     playPad: letter => dispatch(playPad(letter)),
-    setRecordingPosition: position => dispatch(setRecordingPosition(position))
   }
 }
 

@@ -39,9 +39,6 @@ export function endEntry(position) {
 export function editEntry(position, letter, delay) {
   return { type: EDIT_ENTRY, data: { position, letter, delay } }
 }
-export function addEntry(letter, delay) { // TODO: Place this in a thunk in action creators.
-  return { type: ADD_ENTRY, data: { letter, delay } }
-}
 export function deleteEntry(position) {
   return { type: DELETE_ENTRY, position }
 }
@@ -87,6 +84,14 @@ export function playPad(letter) {
 
     if (recordingState === PLAYING || recordingState === RECORDING)
       dispatch(playLine(position));
+  }
+}
+
+export function addEntry(letter, delay) {
+  return (dispatch, getState) => {
+    const { position } = getState();
+    dispatch({ type: ADD_ENTRY, data: { letter, delay } });
+    dispatch(setRecordingPosition(position + 1));
   }
 }
 

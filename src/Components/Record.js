@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, setRecordingPosition, EDITING } from '../actions';
+import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, deleteAllEntries, setRecordingPosition, EDITING } from '../actions';
 import Button from './Button';
 
 import first from '../svg/first.svg';
@@ -21,6 +21,7 @@ class Record extends Component {
       playRecording,
       pauseRecording,
       startRecording,
+      deleteAllEntries,
       setRecordingPosition } = this.props;
 
     return (
@@ -61,9 +62,24 @@ class Record extends Component {
         <Recording />
 
         <div id="recording-bottom-bar" className="button-bar">
-          <button type="button"><img alt="Copy" src={copy}></img></button>
-          <button type="button"><img alt="Paste" src={paste}></img></button>
-          <button type="button"><img alt="Clear" src={clear}></img></button>
+          <Button
+            alt="Copy"
+            src={copy}
+            disabled={recordingState !== PAUSED || recordingData.length < 1}
+            onMouseDown={() => console.log("TODO: Copy")}
+          />
+          <Button
+            alt="Paste"
+            src={paste}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={() => console.log("TODO: Paste")}
+          />
+          <Button
+            alt="Clear"
+            src={clear}
+            disabled={recordingState !== PAUSED}
+            onMouseDown={deleteAllEntries}
+          />
         </div>
       </>
     )
@@ -83,6 +99,7 @@ const mapDispatchToProps = dispatch => {
     playRecording: () => dispatch(beginPlayRecording()),
     pauseRecording: () => dispatch(setRecordingState(PAUSED)),
     startRecording: () => dispatch(setRecordingState(RECORDING)),
+    deleteAllEntries: () => dispatch(deleteAllEntries()),
     setRecordingPosition: position => dispatch(setRecordingPosition(position))
   }
 }

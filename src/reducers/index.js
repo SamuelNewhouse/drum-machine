@@ -3,7 +3,7 @@ import {
   PLAY_ENTRY, END_ENTRY, EDIT_ENTRY, ADD_ENTRY, DELETE_ENTRY,
   ADD_TIMEOUT, CLEAR_ALL_TIMEOUTS,
   SET_RECORDING_STATE, SET_RECORDING_POSITION, SET_VOLUME,
-  PAUSED, RECORDING
+  PAUSED, RECORDING, DELETE_ALL_ENTRIES
 } from '../actions';
 import pads from '../data/pads';
 
@@ -111,6 +111,11 @@ const actionTypeHandlers = {
     recordingData.splice(action.position, 1);
 
     const updates = { recordingData }
+    return Object.assign({}, state, updates);
+  },
+
+  [DELETE_ALL_ENTRIES]: function (state) {
+    const updates = { recordingData: [] }
     return Object.assign({}, state, updates);
   },
 

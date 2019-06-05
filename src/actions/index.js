@@ -7,6 +7,7 @@ export const END_ENTRY = 'END_ENTRY';
 export const EDIT_ENTRY = 'EDIT_ENTRY';
 export const ADD_ENTRY = 'ADD_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const DELETE_ALL_ENTRIES = 'DELETE_ALL_ENTRIES';
 
 export const ADD_TIMEOUT = 'ADD_TIMEOUT';
 export const CLEAR_ALL_TIMEOUTS = 'CLEAR_ALL_TIMEOUTS';
@@ -92,6 +93,13 @@ export function addEntry(letter, delay) {
     const { position } = getState();
     dispatch({ type: ADD_ENTRY, data: { letter, delay } });
     dispatch(setRecordingPosition(position + 1));
+  }
+}
+
+export function deleteAllEntries() {
+  return dispatch => {
+    dispatch({ type: DELETE_ALL_ENTRIES });
+    dispatch(setRecordingPosition(0));
   }
 }
 

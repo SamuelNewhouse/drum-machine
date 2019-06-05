@@ -8,22 +8,21 @@ class EntryForm extends Component {
   onSubmit = event => {
     event.preventDefault();
     const target = event.target;
-    const { position, isEditMode, editEntry, addEntry, exitEditMode } = this.props;
+    const { position, isEditForm, editEntry, addEntry, exitEditMode } = this.props;
 
-    if (isEditMode)
+    if (isEditForm)
       editEntry(position, target.instrument.value, Number(target.delay.value));
     else
       addEntry(target.instrument.value, Number(target.delay.value));
 
-    // TODO: Make this less confusing. There are two different meanings for "EditMode" here.
     exitEditMode();
   }
 
   render() {
-    const { position, recordingData, isEditMode, exitEditMode, playPad } = this.props;
+    const { position, recordingData, isEditForm, exitEditMode, playPad } = this.props;
 
     let letter = "Q", delay = 0;
-    if (isEditMode)
+    if (isEditForm)
       ({ letter, delay } = recordingData[position]);
 
     return (
@@ -51,7 +50,7 @@ const mapStateToProps = state => {
   return {
     position: state.position,
     recordingData: state.recordingData,
-    isEditMode: Boolean(state.recordingData[state.position])
+    isEditForm: Boolean(state.recordingData[state.position])
   }
 }
 

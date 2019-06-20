@@ -12,4 +12,16 @@ const pads = new Map([
   ["C", { id: "kick-n-hat", url: baseURL + "Kick_n_Hat.mp3" }],
 ]);
 
+export const nameToLetter = {
+  "closed-hh": "Q",
+  "open-hh": "W",
+  "shaker": "E",
+  "clap": "A",
+  "side-stick": "S",
+  "snare": "D",
+  "punchy-kick": "Z",
+  "kick": "X",
+  "kick-n-hat": "C",
+}
+
 export default pads;

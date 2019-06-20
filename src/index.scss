@@ -20,8 +20,9 @@
 }
 
 #drum-machine {
-  align-items: stretch;
   display: grid;
+  margin: 10px auto;
+  align-items: stretch;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto 1fr auto;
   grid-template-areas:
@@ -30,7 +31,7 @@
   "pads recording"
   "volume recording-bottom-bar";
   max-width: 1024px;
-  margin: auto;
+  white-space: nowrap;
 }
 
 footer {
@@ -60,6 +61,11 @@ footer {
       background: #aaa;
     }
   }
+}
+
+.drum-pad {
+  font-size: 1.5em;
+  user-select: none;
 }
 
 #display {
@@ -170,12 +176,18 @@ footer {
 
 .edit-form {
   position: absolute;
+  white-space: pre-wrap;
   background: #fff;
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px;
-  select {
-    width: auto;
+  label {
+    display: block;
+  }
+  select, .form-control {
+    display: inline-block;
+    width: 100%;
+
   }
 }
 

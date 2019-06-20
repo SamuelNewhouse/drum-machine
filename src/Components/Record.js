@@ -71,7 +71,7 @@ class Record extends Component {
           <Button
             alt="Clear"
             src={clear}
-            disabled={recordingState !== PAUSED}
+            disabled={recordingState !== PAUSED || recordingData.length < 1}
             onMouseDown={deleteAllEntries}
           />
         </div>

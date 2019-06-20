@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PAUSED, RECORDING, setRecordingState, beginPlayRecording, deleteAllEntries, setRecordingPosition, EDITING } from '../actions';
 import Button from './Button';
+import stringifyRecordingData from '../util/stringifyRecordingData';
+import copyToClipboard from '../util/copyToClipboard';
 
 import first from '../svg/first.svg';
 import play from '../svg/play3.svg';
@@ -66,7 +68,7 @@ class Record extends Component {
             alt="Copy"
             src={copy}
             disabled={recordingState !== PAUSED || recordingData.length < 1}
-            onMouseDown={() => console.log("TODO: Copy")}
+            onMouseDown={() => copyToClipboard(stringifyRecordingData(recordingData))}
           />
           <Button
             alt="Paste"

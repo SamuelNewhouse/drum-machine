@@ -11,7 +11,6 @@ import pause from '../svg/pause2.svg';
 import record from '../svg/record.svg';
 import last from '../svg/last.svg';
 import copy from '../svg/copy.svg';
-import paste from '../svg/paste.svg';
 import clear from '../svg/bin.svg';
 import Recording from './Recording';
 
@@ -60,7 +59,6 @@ class Record extends Component {
             onMouseDown={() => setRecordingPosition(recordingData.length)}
           />
         </div>
-
         <Recording />
 
         <div id="recording-bottom-bar" className="button-bar">
@@ -69,12 +67,6 @@ class Record extends Component {
             src={copy}
             disabled={recordingState !== PAUSED || recordingData.length < 1}
             onMouseDown={() => copyToClipboard(stringifyRecordingData(recordingData))}
-          />
-          <Button
-            alt="Paste"
-            src={paste}
-            disabled={recordingState !== PAUSED}
-            onMouseDown={() => console.log("TODO: Paste")}
           />
           <Button
             alt="Clear"

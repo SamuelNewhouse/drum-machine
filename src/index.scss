@@ -1,5 +1,38 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
+$color-primary-0: #52A55C;	// Main Primary color */
+$color-primary-1: #ADFCB6;
+$color-primary-2: #79D784;
+$color-primary-3: #235E2A;
+$color-primary-4: #051107;
+
+$color-secondary-1-0: #417C81;	// Main Secondary color (1) */
+$color-secondary-1-1: #ACF3FA;
+$color-secondary-1-2: #69B3BA;
+$color-secondary-1-3: #1C4549;
+$color-secondary-1-4: #040C0D;
+
+$color-secondary-2-0: #D59C6A;	// Main Secondary color (2) */
+$color-secondary-2-1: #FFD4AF;
+$color-secondary-2-2: #FFC48F;
+$color-secondary-2-3: #79502D;
+$color-secondary-2-4: #160E07;
+
+$color-complement-0: #D56F6A;	// Main Complement color */
+$color-complement-1: #FFB3AF;
+$color-complement-2: #FF958F;
+$color-complement-3: #79302D;
+$color-complement-4: #160707;
+
+$green: #52a55d;
+$blue: #1C4549;
+$light-blue: #69B3BA;
+$red: #79302D;
+$light-red: #D56F6A;
+$orange: #D59C6A;
+$brown: #79502D;
+$black: #000;
+
 @mixin gridSquares($columns) {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);

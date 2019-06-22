@@ -52,6 +52,9 @@ $black: #000;
   }
 }
 
+@mixin dividerBorder {
+  border: 5px solid $black;
+}
 
 .btn {
   transition: all .15s ease-in-out;
@@ -101,7 +104,7 @@ footer {
   grid-area: pads;
   gap: 20px;
   padding: 20px;
-  border: 1px solid black;
+  @include dividerBorder();
   border-bottom: none;
 
   button {
@@ -129,13 +132,13 @@ footer {
   grid-area: display;
   font-size: 1.5em;
   text-align: center;
-  border: 1px solid black;
+  @include dividerBorder();
   border-left: none;
 }
 
 #recording-top-bar {
   grid-area: recording-top-bar;
-  border: 1px solid black;
+  @include dividerBorder();
   border-left: none;
   border-top: none;
 }
@@ -145,7 +148,7 @@ footer {
   position: relative;
   grid-area: recording;
   overflow: auto;
-  border: 1px solid black;
+  @include dividerBorder();
   border-left: none;
   border-top: none;
 
@@ -200,7 +203,7 @@ footer {
 
 #recording-bottom-bar {
   grid-area: recording-bottom-bar;
-  border: 1px solid black;
+  @include dividerBorder();
   border-left: none;
   border-top: none;
 }
@@ -210,7 +213,7 @@ footer {
   display: flex;
   align-items: center;
   padding: 0 10px;
-  border: 1px solid black;
+  @include dividerBorder();
   border-top: none;
 
   img {

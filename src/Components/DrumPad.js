@@ -26,7 +26,7 @@ class DrumPad extends Component {
       <button
         type="button"
         id={id}
-        className={"drum-pad " + pressed}
+        className={"drum-pad btn " + pressed}
         onMouseDown={() => { playPad(letter) }}
         ref={this.buttonRef}
       >

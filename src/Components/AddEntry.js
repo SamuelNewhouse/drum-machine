@@ -7,7 +7,7 @@ const AddEntry = ({ classes, name, delay, isBeingEdited, onMouseDown, startEdit 
   return (
     <div className={classes} onMouseDown={onMouseDown}>
       <span className="info">{name} - {delay}</span>
-      <button type="button" className="edit" onClick={startEdit}>Add</button>
+      <button type="button" className="edit btn" onClick={startEdit}>Add</button>
       {isBeingEdited && <EntryForm/>}
     </div>
   )

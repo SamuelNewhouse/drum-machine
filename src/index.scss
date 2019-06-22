@@ -52,6 +52,30 @@ $black: #000;
   }
 }
 
+
+.btn {
+  transition: all .15s ease-in-out;
+  font-weight: 500;
+  color: #000;
+  background: $orange;
+  border: 2px outset $brown;
+
+  &:hover:not(:disabled) {
+    background: scale-color($orange, $lightness: 20%);
+    border: 2px outset scale-color($brown, $lightness: 20%);;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    img {
+      opacity: 0.2;
+    }
+  }
+}
+
 #drum-machine {
   display: grid;
   margin: 10px auto;

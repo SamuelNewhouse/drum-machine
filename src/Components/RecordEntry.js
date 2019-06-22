@@ -7,8 +7,8 @@ const RecordEntry = ({ componentPosition, classes, name, delay, isBeingEdited, o
   return (
     <div className={classes} onMouseDown={onMouseDown}>
       <span className="info">{name} - {delay}</span>
-      <button type="button" className="edit" onClick={startEdit}>Edit</button>
-      <button type="button" className="delete" onClick={() => deleteEntry(componentPosition)}>X</button>
+      <button type="button" className="edit btn" onClick={startEdit}>Edit</button>
+      <button type="button" className="delete btn" onClick={() => deleteEntry(componentPosition)}>X</button>
       {isBeingEdited && <EntryForm/>}
     </div>
   )

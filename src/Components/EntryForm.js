@@ -39,8 +39,8 @@ class EntryForm extends Component {
           <label htmlFor="delay">Delay</label>
           <input type="number" className="form-control" id="delay" min="0" max="3600000" step="1" defaultValue={delay}></input>
         </div>
-        <input type="submit" value="Save"></input>
-        <button type="button" onClick={exitEditMode} >Cancel</button>
+        <input className="btn" type="submit" value="Save"></input>
+        <button className="btn" type="button" onClick={exitEditMode} >Cancel</button>
       </form>
     )
   }

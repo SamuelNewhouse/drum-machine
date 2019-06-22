@@ -79,6 +79,17 @@ $black: #000;
   }
 }
 
+html, body {
+  background: $black;
+  color: #fff;
+  user-select: none;
+}
+
+footer {
+  max-width: 1024px;
+  margin: auto;
+}
+
 #drum-machine {
   display: grid;
   margin: 10px auto;
@@ -94,11 +105,6 @@ $black: #000;
   white-space: nowrap;
 }
 
-footer {
-  max-width: 1024px;
-  margin: auto;
-}
-
 #drum-pads {
   @include gridSquares(3);
   grid-area: pads;
@@ -106,26 +112,30 @@ footer {
   padding: 20px;
   @include dividerBorder();
   border-bottom: none;
+  background: linear-gradient(to bottom, $blue 5%, $light-blue 100% );
 
   button {
     transition: all 0.05s ease-in-out;
-    background: #fff;
-    border: 1px solid black;
+    color: #ffffff;
+    background: $green;
+    border: 1px solid #000;
+    box-shadow: 1px 1px 2px #000;
     border-radius: 7px;
+    &:hover {
+      background: scale-color($green, $lightness: 20%);
+    }
     &:focus {
       outline: none;
-      box-shadow: 0px 0px 4px #001122;
+      box-shadow: 0px 0px 8px #ffffff;
     }
-
     &.pressed {
-      background: #aaa;
+      background: scale-color($green, $lightness: 50%);
     }
   }
 }
 
 .drum-pad {
   font-size: 1.5em;
-  user-select: none;
 }
 
 #display {
@@ -134,6 +144,18 @@ footer {
   text-align: center;
   @include dividerBorder();
   border-left: none;
+}
+
+#recording  {
+  background: linear-gradient(to bottom, $red 5%, $light-red 100%);
+  color: #fff;
+}
+#display, #recording-top-bar {
+  background: $red;
+}
+
+#recording-bottom-bar{
+  background: $light-red;
 }
 
 #recording-top-bar {
@@ -194,7 +216,7 @@ footer {
   }
   &.entry-selected, &.entry-playing {
     .info {
-      border: 1px solid black;
+      border: 1px solid #000;
       border-radius: 3px;
       box-shadow: 0px 0px 4px #001122;
     }
@@ -215,6 +237,7 @@ footer {
   padding: 0 10px;
   @include dividerBorder();
   border-top: none;
+  background: $light-blue;
 
   img {
     width: 20px;
@@ -228,17 +251,12 @@ footer {
   }
 }
 
-.button-bar {
-  button:disabled img {
-    opacity: 0.2;
-  }
-}
-
 .edit-form {
   position: absolute;
   white-space: pre-wrap;
-  background: #fff;
-  border: 1px solid black;
+  background: $blue;
+  color: #fff;
+  border: 1px solid #000;
   border-radius: 5px;
   padding: 5px;
   label {

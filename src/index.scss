@@ -10,6 +10,8 @@ $orange: #D59C6A;
 $brown: #79502D;
 $black: #000;
 
+$border-width: 5px;
+
 @mixin gridSquares($columns) {
   display: grid;
   grid-template-columns: repeat($columns, 1fr);
@@ -29,8 +31,8 @@ $black: #000;
   }
 }
 
-@mixin dividerBorder {
-  border: 5px solid $black;
+@mixin dividerBorder() {
+  border: 0px solid #000;
 }
 
 @mixin glow($color) {
@@ -63,7 +65,10 @@ h1 {
   color: #ec8c37;
   font-family: 'Overpass Mono', monospace;
 }
+
 footer {
+  max-width: 1024px;
+  margin: auto;
   padding-top: 10px;
   font-family: 'Overpass Mono', monospace;
 }
@@ -96,17 +101,6 @@ footer {
   }
 }
 
-html, body {
-  background: $black;
-  color: #fff;
-  user-select: none;
-}
-
-footer {
-  max-width: 1024px;
-  margin: auto;
-}
-
 #drum-machine {
   display: grid;
   margin: 0 auto;
@@ -123,13 +117,12 @@ footer {
 }
 
 #drum-pads {
-  @include dividerBorder();
   @include gridSquares(3);
+  @include dividerBorder();
+  border-right-width: $border-width;
   grid-area: pads;
   gap: 20px;
   padding: 20px;
-  border-bottom: none;
-  border-left: none;
   background: linear-gradient(to bottom, $blue 5%, $light-blue 100% );
 
   button {
@@ -156,33 +149,52 @@ footer {
   font-size: 1.5em;
 }
 
+#volume {
+  @include dividerBorder();
+  border-right-width: $border-width;
+  grid-area: volume;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: $light-blue;
+
+  img {
+    width: 20px;
+    opacity: .75;
+  }
+
+  input
+  {
+    margin: 0 10px;
+    flex: 1 1 auto;
+  }
+}
+
 #display {
   @include dividerBorder();
+  border-bottom-width: $border-width;
   grid-area: display;
   background: $red;
   font-size: 1.5em;
   text-align: center;
-  border-left: none;
 }
 
 #recording-top-bar {
   @include dividerBorder();
+  border-bottom-width: $border-width;
   grid-area: recording-top-bar;
   background: $red;
-  border-left: none;
-  border-top: none;
 }
 
 #recording {
   @include dividerBorder();
+  border-bottom-width: $border-width;
   background: linear-gradient(to bottom, $red 5%, $light-red 100%);
   color: #fff;
   cursor: default;
   position: relative;
   grid-area: recording;
   overflow: auto;
-  border-left: none;
-  border-top: none;
 
   & > div {
     max-height: 100%;
@@ -235,33 +247,8 @@ footer {
 }
 
 #recording-bottom-bar {
-  @include dividerBorder();
   grid-area: recording-bottom-bar;
   background: $light-red;
-  border-left: none;
-  border-top: none;
-}
-
-#volume {
-  @include dividerBorder();
-  grid-area: volume;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  border-top: none;
-  border-left: none;
-  background: $light-blue;
-
-  img {
-    width: 20px;
-    opacity: .75;
-  }
-
-  input
-  {
-    margin: 0 10px;
-    flex: 1 1 auto;
-  }
 }
 
 .edit-form {
@@ -294,13 +281,16 @@ footer {
   body {
     padding: 0 15%;
   }
-  #recording {
-    min-height: 300px;
+  #drum-pads {
+    border-width: 0;
   }
   #volume {
     padding-bottom: 5px;
+    border-width: 0 0 $border-width * 2 0;
   }
-
+  #recording {
+    min-height: 300px;
+  }
   #drum-machine {
     grid-template-rows: repeat(autofill, auto);
     grid-template-columns: 1fr;
@@ -312,6 +302,7 @@ footer {
     "recording"
     "recording-bottom-bar";
   }
+
 }
 
 @media only screen and (max-width: 450px) {

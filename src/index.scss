@@ -277,9 +277,16 @@ footer {
   }
 }
 
-@media only screen and (max-width: 650px) {
-  body {
-    padding: 0 15%;
+@media only screen and (max-width: 700px) {
+  footer {
+    text-align: center;
+  }
+
+  #drum-machine {
+    max-width: 400px;
+  }
+  #recording {
+    min-height: 300px;
   }
   #drum-pads {
     border-width: 0;
@@ -287,9 +294,6 @@ footer {
   #volume {
     padding-bottom: 5px;
     border-width: 0 0 $border-width * 2 0;
-  }
-  #recording {
-    min-height: 300px;
   }
   #drum-machine {
     grid-template-rows: repeat(autofill, auto);
@@ -302,39 +306,44 @@ footer {
     "recording"
     "recording-bottom-bar";
   }
-
 }
 
 @media only screen and (max-width: 450px) {
+  h1, footer, #display {
+    text-align: center;
+    font-size: 1em;
+  }
   .record-button {
     padding: 7px;
   }
-  body {
-    padding: 0 10%;
+  #drum-machine {
+    max-width: 300px;
   }
   #recording {
-    min-height: 250px;
+    min-height: 225px;
   }
-
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 400px) {
   .record-button {
-    padding: 5px;
+    padding: 4px;
   }
-  body {
-    padding: 0 5%;
+  #drum-machine {
+    max-width: 250px;
   }
   #recording {
     min-height: 200px;
   }
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 350px) {
   .record-button {
-    padding: 3px;
+    padding: 2px;
   }
-  body {
-    padding: 0 3%;
+  #drum-machine {
+    max-width: 200px;
+  }
+  #recording {
+    min-height: 180px;
   }
 }
